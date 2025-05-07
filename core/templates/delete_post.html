@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% block title %}Gönderiyi Sil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="alert alert-warning text-center">
+    <h4>“{{ post.title }}” başlıklı gönderiyi silmek istediğine emin misin?</h4>
+    <form method="post" class="mt-4 d-inline">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Evet, Sil</button>
+    </form>
+    <a href="{% url 'post_list' %}" class="btn btn-secondary ms-2">Vazgeç</a>
+  </div>
+</div>
+{% endblock %}

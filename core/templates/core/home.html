@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %}
+{% block title %}Ana Sayfa{% endblock %}
+{% block content %}
+<div class="container text-center mt-5">
+    <h1>{{ message }}</h1>
+    <a href="{% url 'create_post' %}" class="btn btn-primary mt-3">Yeni Gönderi Oluştur</a>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+{% block title %}Gönderiyi Düzenle{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Gönderiyi Düzenle</h3>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100">Kaydet</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block title %}Gönderiler{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Gönderiler</h1>
+  {% for post in posts %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title">{{ post.title }}</h4>
+        <p class="card-text">{{ post.content }}</p>
+        <small class="text-muted">Oluşturulma: {{ post.created_at }}</small><br>
+        <a href="{% url 'edit_post' post.pk %}" class="btn btn-sm btn-outline-primary mt-2">✏️ Düzenle</a>
+        <a href="{% url 'delete_post' post.pk %}" class="btn btn-sm btn-outline-danger mt-2">🗑️ Sil</a>
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-muted">Hiç gönderi yok.</p>
+  {% endfor %}
+</div>
+{% endblock %}

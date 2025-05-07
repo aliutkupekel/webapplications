@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+{% block title %}Yeni Gönderi{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">Yeni Gönderi Oluştur</h3>
+            <form method="post" action="{% url 'create_post' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success w-100">Gönder</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

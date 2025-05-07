@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Başarılı!{% endblock %}
+{% block content %}
+<div class="container mt-5 text-center">
+  <div class="alert alert-success">
+    <h4>Gönderi başarıyla oluşturuldu!</h4>
+    <a href="{% url 'create_post' %}" class="btn btn-primary mt-3">Yeni gönderi ekle</a>
+  </div>
+</div>
+{% endblock %}

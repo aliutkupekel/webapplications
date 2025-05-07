@@ -1,0 +1,11 @@
+{% extends 'core/base.html' %}
+{% block title %}Çıkış Yapıldı{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="alert alert-info text-center">
+    <h4>Oturumunuz sonlandırıldı.</h4>
+    <p>Giriş yapmak için <a href="{% url 'login' %}" class="alert-link">buraya tıklayın</a> veya <a href="{% url 'home' %}">anasayfaya dönün</a>.</p>
+  </div>
+</div>
+{% endblock %}
