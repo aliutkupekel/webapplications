@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core.apps.CoreConfig',  # <- doğru ekleme bu
-    'widget_tweaks',  # 👈 bunu ekle
-
+    'core.apps.CoreConfig',  
+    'widget_tweaks', 
+    'rest_framework',        
+    'rest_framework.authtoken',        # we added this 
 ]
 
 
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'site77695.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'core' / 'templates'],  # ✅ EKLEDİK
+        'DIRS': [BASE_DIR / 'core' / 'templates'], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,3 +138,14 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',             # for authentiocation we added this to settings.py
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'

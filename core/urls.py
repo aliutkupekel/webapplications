@@ -1,8 +1,17 @@
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import path, include #also we added include and we need also path here 
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+#to register router in urls.py
+from rest_framework.routers import DefaultRouter
+from core.views import PostViewSet
+from rest_framework.authtoken.views import obtain_auth_token # we added this as import for auth_token
+
+
+# DRF router registeration
+router = DefaultRouter()
+router.register(r'api/posts', PostViewSet, basename='post')
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -18,7 +27,11 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('posts/<int:pk>/edit/', views.edit_post, name='edit_post'),
     path('posts/<int:pk>/delete/', views.delete_post, name='delete_post'),
+    path('api/token/', obtain_auth_token, name='api_token_auth'), # auth_token
+
+    # we adding here DRF endpoints
+    path('', include(router.urls)),
+
     
- 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

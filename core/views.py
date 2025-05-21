@@ -6,6 +6,12 @@ from django.contrib.auth import login  # Eksikse ekle
 from .forms import PostForm, UserUpdateForm, ProfileForm, RegisterForm  # RegisterForm varsa
 from .models import Post, Profile
 from django.contrib.auth.models import Group
+# Needed imports for DRF 
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from .serializers import PostSerializer  # serializers.py
+from .tasks import send_post_notification  # CELERY görevi
+
 
 def is_admin(user):
     return user.groups.filter(name='admins').exists()
@@ -95,3 +101,13 @@ def profile_view(request):
         'user': request.user,
         'profile': request.user.profile,
     })
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all().order_by('-id')
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def perform_create(self, serializer):
+        post = serializer.save()
+        send_post_notification.delay(post.id)  # Görev arka planda çalışır
